@@ -1,0 +1,13 @@
+D:\ContactPro\ContactPro\bin\Debug\ContactPro.exe.config
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.csprojResolveAssemblyReference.cache
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.FormMain.resources
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.Properties.Resources.resources
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.csproj.GenerateResource.Cache
+D:\ContactPro\ContactPro\bin\Debug\ContactPro.exe
+D:\ContactPro\ContactPro\bin\Debug\ContactPro.pdb
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.exe
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.pdb
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.forms.FormDistricts.resources
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.forms.FormConstituency.resources
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.forms.FormPanchayat.resources
+D:\ContactPro\ContactPro\obj\Debug\ContactPro.forms.FormMembership.resources
