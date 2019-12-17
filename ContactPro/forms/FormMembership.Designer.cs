@@ -491,7 +491,7 @@
             // 
             // btnClear3
             // 
-            this.btnClear3.Location = new System.Drawing.Point(848, 275);
+            this.btnClear3.Location = new System.Drawing.Point(848, 268);
             this.btnClear3.Name = "btnClear3";
             this.btnClear3.Size = new System.Drawing.Size(86, 34);
             this.btnClear3.TabIndex = 57;
@@ -501,7 +501,7 @@
             // 
             // btnBrowse3
             // 
-            this.btnBrowse3.Location = new System.Drawing.Point(654, 275);
+            this.btnBrowse3.Location = new System.Drawing.Point(654, 268);
             this.btnBrowse3.Name = "btnBrowse3";
             this.btnBrowse3.Size = new System.Drawing.Size(86, 34);
             this.btnBrowse3.TabIndex = 57;
@@ -511,7 +511,7 @@
             // 
             // btnClear2
             // 
-            this.btnClear2.Location = new System.Drawing.Point(524, 275);
+            this.btnClear2.Location = new System.Drawing.Point(524, 268);
             this.btnClear2.Name = "btnClear2";
             this.btnClear2.Size = new System.Drawing.Size(86, 34);
             this.btnClear2.TabIndex = 57;
@@ -521,7 +521,7 @@
             // 
             // btnBrowse2
             // 
-            this.btnBrowse2.Location = new System.Drawing.Point(330, 275);
+            this.btnBrowse2.Location = new System.Drawing.Point(330, 268);
             this.btnBrowse2.Name = "btnBrowse2";
             this.btnBrowse2.Size = new System.Drawing.Size(86, 34);
             this.btnBrowse2.TabIndex = 57;
@@ -531,7 +531,7 @@
             // 
             // btnClear1
             // 
-            this.btnClear1.Location = new System.Drawing.Point(201, 275);
+            this.btnClear1.Location = new System.Drawing.Point(201, 268);
             this.btnClear1.Name = "btnClear1";
             this.btnClear1.Size = new System.Drawing.Size(86, 34);
             this.btnClear1.TabIndex = 57;
@@ -541,7 +541,7 @@
             // 
             // btnBrowse1
             // 
-            this.btnBrowse1.Location = new System.Drawing.Point(5, 275);
+            this.btnBrowse1.Location = new System.Drawing.Point(5, 268);
             this.btnBrowse1.Name = "btnBrowse1";
             this.btnBrowse1.Size = new System.Drawing.Size(86, 34);
             this.btnBrowse1.TabIndex = 57;
@@ -587,25 +587,31 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(653, 39);
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.Location = new System.Drawing.Point(653, 37);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(281, 230);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(329, 39);
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Location = new System.Drawing.Point(329, 37);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(281, 230);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 39);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 37);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(281, 230);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -713,6 +719,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMembership";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Membership Entry";
             this.TitleText = "Membership Entry";

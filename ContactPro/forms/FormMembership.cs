@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace ContactPro.forms
 {
@@ -105,9 +106,6 @@ namespace ContactPro.forms
         {
             //delete data
             deldata();
-            clear();
-            memdata();
-            txtName.Focus();
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -117,32 +115,77 @@ namespace ContactPro.forms
 
         private void btnBrowse1_Click(object sender, EventArgs e)
         {
+            String imageLocation = "";
+            try
+            {
+                OpenFileDialog diolog = new OpenFileDialog();
+                diolog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*.*)|*.*";
 
+                if (diolog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    imageLocation = diolog.FileName;
+                    pictureBox1.ImageLocation = imageLocation;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnClear1_Click(object sender, EventArgs e)
         {
-
+            pictureBox1.Image = null;
         }
 
         private void btnBrowse2_Click(object sender, EventArgs e)
         {
+            String imageLocation = "";
+            try
+            {
+                OpenFileDialog diolog = new OpenFileDialog();
+                diolog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*.*)|*.*";
 
+                if (diolog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    imageLocation = diolog.FileName;
+                    pictureBox2.ImageLocation = imageLocation;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnClear2_Click(object sender, EventArgs e)
         {
-
+            pictureBox2.Image = null;
         }
 
         private void btnBrowse3_Click(object sender, EventArgs e)
         {
+            String imageLocation = "";
+            try
+            {
+                OpenFileDialog diolog = new OpenFileDialog();
+                diolog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*.*)|*.*";
 
+                if (diolog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    imageLocation = diolog.FileName;
+                    pictureBox3.ImageLocation = imageLocation;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnClear3_Click(object sender, EventArgs e)
         {
-
+            pictureBox3.Image = null;
         }
 
         private void txtsrch_KeyDown(object sender, KeyEventArgs e)
@@ -327,6 +370,7 @@ namespace ContactPro.forms
 
         public void getdata()
         {
+            //set all picturebox image to null
             cmd = new MySqlCommand("SELECT * FROM tbl_membership WHERE code = @code;", Conn.allcon);
             cmd.Parameters.AddWithValue("@code", txtCode.Text);
             Conn.Open();
@@ -361,25 +405,43 @@ namespace ContactPro.forms
                 {
                     txtAddress2.Text = dr["add2"].ToString();
                 }
-                if (dr["dob"].ToString() != "")
+                if (dr["city"].ToString() != "")
                 {
-                    txtDOB.Text = dr["dob"].ToString();
+                    txtCity.Text = dr["city"].ToString();
                 }
-                if (dr["dob"].ToString() != "")
+                if (dr["district_code"].ToString() != "")
                 {
-                    txtDOB.Text = dr["dob"].ToString();
+                    cmbDistrict.SelectedValue = dr["district_code"].ToString();
                 }
-                if (dr["dob"].ToString() != "")
+                if (dr["panchayat_code"].ToString() != "")
                 {
-                    txtDOB.Text = dr["dob"].ToString();
+                    cmbPanchayat.SelectedValue = dr["panchayat_code"].ToString();
                 }
-                if (dr["dob"].ToString() != "")
+                if (dr["const_code"].ToString() != "")
                 {
-                    txtDOB.Text = dr["dob"].ToString();
+                    cmbConst.SelectedValue = dr["const_code"].ToString();
                 }
-                if (dr["dob"].ToString() != "")
+                if (dr["mobile"].ToString() != "")
                 {
-                    txtDOB.Text = dr["dob"].ToString();
+                    txtMobile.Text = dr["mobile"].ToString();
+                }
+                if (dr["voter_img"].ToString() != "")
+                {
+                    byte[] vi = (byte[])dr["voter_img"];
+                    MemoryStream ms = new MemoryStream(vi);
+                    pictureBox1.Image = Image.FromStream(ms);
+                }
+                if (dr["aadhar_img"].ToString() != "")
+                {
+                    byte[] ai = (byte[])dr["aadhar_img"];
+                    MemoryStream ms = new MemoryStream(ai);
+                    pictureBox2.Image = Image.FromStream(ms);
+                }
+                if (dr["pan_img"].ToString() != "")
+                {
+                    byte[] pi = (byte[])dr["pan_img"];
+                    MemoryStream ms = new MemoryStream(pi);
+                    pictureBox3.Image = Image.FromStream(ms);
                 }
 
                 btn_delete.Enabled = true;
@@ -403,6 +465,9 @@ namespace ContactPro.forms
             cmbPanchayat.SelectedValue = "0";
             cmbConst.SelectedValue = "0";
             txtMobile.Text = "";
+            pictureBox1.Image = null;
+            pictureBox2.Image = null;
+            pictureBox3.Image = null;
             auto();
             btn_delete.Enabled = false;
         }
@@ -570,7 +635,7 @@ namespace ContactPro.forms
             {
                 if (FRMENTMODE == "New")
                 {
-                    cmd = new MySqlCommand("INSERT INTO contactpro.tbl_membership(id, code, person_name, dob, father_name, gender, add1, add2, city, district_code, district, panchayat_code, panchayat, const_code, const, mobile) VALUES (@id, @code, @person_name, @dob, @father_name, @gender, @add1, @add2, @city, @district_code, @district, @panchayat_code, @panchayat, @const_code, @const, @mobile);", Conn.allcon);
+                    cmd = new MySqlCommand("INSERT INTO contactpro.tbl_membership(id, code, person_name, dob, father_name, gender, add1, add2, city, district_code, district, panchayat_code, panchayat, const_code, const, mobile, voter_img, aadhar_img, pan_img) VALUES (@id, @code, @person_name, @dob, @father_name, @gender, @add1, @add2, @city, @district_code, @district, @panchayat_code, @panchayat, @const_code, @const, @mobile, @voter_img, @aadhar_img, @pan_img);", Conn.allcon);
                     cmd.Parameters.AddWithValue("@id", num.Text);
                     cmd.Parameters.AddWithValue("@code", txtCode.Text);
                     cmd.Parameters.AddWithValue("@person_name", txtName.Text);
@@ -600,6 +665,14 @@ namespace ContactPro.forms
 
                     cmd.Parameters.AddWithValue("@mobile", txtMobile.Text);
 
+                    byte[] voterImg = pictureBox1 == null || pictureBox1.Image == null ? null : imageToMemory(pictureBox1);
+                    byte[] aadharImg = pictureBox2 == null || pictureBox2.Image == null ? null : imageToMemory(pictureBox2);
+                    byte[] panImg = pictureBox3 == null || pictureBox3.Image == null ? null : imageToMemory(pictureBox3);
+
+                    cmd.Parameters.AddWithValue("@voter_img", voterImg);
+                    cmd.Parameters.AddWithValue("@aadhar_img", aadharImg);
+                    cmd.Parameters.AddWithValue("@pan_img", panImg);
+
                     Conn.Open();
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Code is - " + txtCode.Text, "Data saved successfully");
@@ -619,12 +692,45 @@ namespace ContactPro.forms
 
         public void update()
         {
-            Conn.Open();
-            cmd = new MySqlCommand("UPDATE tbl_membership SET name = @name WHERE code = @code", Conn.allcon);
+            cmd = new MySqlCommand("UPDATE contactpro.tbl_membership SET person_name = @person_name, dob = @dob, father_name = @father_name, gender = @gender, add1 = @add1, add2 = @add2, city = @city, district_code = @district_code, district = @district, panchayat_code = @panchayat_code, panchayat = @panchayat, const_code = @const_code, const = @const, mobile = @mobile, voter_img = @voter_img, aadhar_img = @aadhar_img, pan_img = @pan_img WHERE code = @code;", Conn.allcon);
 
-            cmd.Parameters.AddWithValue("@name", txtName.Text);
             cmd.Parameters.AddWithValue("@code", txtCode.Text);
+            cmd.Parameters.AddWithValue("@person_name", txtName.Text);
+            String mysqldob = Convert.ToDateTime(txtDOB.Text).ToString("yyyy-MM-dd");
+            //Console.WriteLine(mysqldob);
+            cmd.Parameters.AddWithValue("@dob", mysqldob);
+            cmd.Parameters.AddWithValue("@father_name", txtFatherName.Text);
+            cmd.Parameters.AddWithValue("@gender", cmbGender.Text);
+            cmd.Parameters.AddWithValue("@add1", txtAddress1.Text);
+            cmd.Parameters.AddWithValue("@add2", txtAddress2.Text);
+            cmd.Parameters.AddWithValue("@city", txtCity.Text);
 
+            String distCode = cmbDistrict.SelectedValue.ToString();
+            String distName = getDistName(distCode);
+            cmd.Parameters.AddWithValue("@district_code", distCode);
+            cmd.Parameters.AddWithValue("@district", distName);
+
+            String panchayatCode = cmbPanchayat.SelectedValue.ToString();
+            String panchayatName = getPanchaytName(panchayatCode);
+            cmd.Parameters.AddWithValue("@panchayat_code", panchayatCode);
+            cmd.Parameters.AddWithValue("@panchayat", panchayatName);
+
+            String constCode = cmbConst.SelectedValue.ToString();
+            String constName = getConstituencyName(constCode);
+            cmd.Parameters.AddWithValue("@const_code", constCode);
+            cmd.Parameters.AddWithValue("@const", constName);
+
+            cmd.Parameters.AddWithValue("@mobile", txtMobile.Text);
+
+            byte[] voterImg = pictureBox1 == null || pictureBox1.Image == null ? null : imageToMemory(pictureBox1);
+            byte[] aadharImg = pictureBox2 == null || pictureBox2.Image == null ? null : imageToMemory(pictureBox2);
+            byte[] panImg = pictureBox3 == null || pictureBox3.Image == null ? null : imageToMemory(pictureBox3);
+
+            cmd.Parameters.AddWithValue("@voter_img", voterImg);
+            cmd.Parameters.AddWithValue("@aadhar_img", aadharImg);
+            cmd.Parameters.AddWithValue("@pan_img", panImg);
+
+            Conn.Open();
             cmd.ExecuteNonQuery();
             FRMENTMODE = "New";
             labelMode.Text = "Mode: New Entry";
@@ -657,6 +763,8 @@ namespace ContactPro.forms
                 clear();
                 labelMode.Text = "Mode: New Entry";
                 FRMENTMODE = "New";
+                memdata();
+                txtName.Focus();
             }
             Conn.Close();
         }
@@ -768,6 +876,14 @@ namespace ContactPro.forms
                 return false;
             }
             return true;
+        }
+
+        public byte[] imageToMemory(PictureBox pic)
+        {
+            MemoryStream ms = new MemoryStream();
+            pic.Image.Save(ms, pic.Image.RawFormat);
+            byte[] img = ms.ToArray();
+            return img;
         }
     }
 }

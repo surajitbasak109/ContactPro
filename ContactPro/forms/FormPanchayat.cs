@@ -298,9 +298,13 @@ namespace ContactPro.forms
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch
+                catch (MySqlException ex)
                 {
-                    MessageBox.Show("Something went wrong...", "Violation Error!!! System Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("You cannot delete it(Error Code: " + ex.Number.ToString() + ")", "Violation Error!!! System Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (ex.Number == 1451)
+                    {
+                        MessageBox.Show("Panchyat is already in use.", "Foreign key error");
+                    }
                 }
                 btn_delete.Enabled = false;
                 clear();
